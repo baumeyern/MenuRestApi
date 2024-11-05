@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MenuApi.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+190f6447ce044dff0cb79210895c6d0190c43eda")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbfa12bce87d4b574cf35f29871a2a1c50d0d109")]
 [assembly: System.Reflection.AssemblyProductAttribute("MenuApi.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MenuApi.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
