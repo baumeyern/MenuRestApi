@@ -1,30 +1,30 @@
 # Menu Items API
 
 This API provides full CRUD (Create, Read, Update, Delete) functionality for managing menu items. Use it to manage a collection of items with properties such as name, description, price, and category.
-
 ## Table of Contents
 
-- [Features](#features)
+- [Design Features](#design-features)
+- [Features](#functional-features)
 - [Getting Started](#getting-started)
 - [API Endpoints](#api-endpoints)
-- [Models](#models)
-- [Example Requests](#example-requests)
-
+- [Example Request](#example-request)
+- [Testing](#tests)
 ---
 
-## Features
+## Design Features
+- **Dependency Injection**: Facilitates service lifetime management and improves testability with DI.
+- **Entity Framework Core**: Handles database operations, migrations, and queries with EF Core.
+- **MVC Design Pattern**:  Clean separation of responsibilities between models, API endpoints (views), and controllers.
+- **Swagger/OpenAPI**: Built-in Swagger UI for easy API testing and comprehensive documentation.
+- **SOLID Principles**: Follows SOLID principles to promote clean, maintainable, and scalable code.
+- **Clean Code**: Follows clean code guidelines for maintainable and easy-to-read code.
+
+## Functional Features
 - Supports full CRUD operations on menu items in a restaurant-style database.
 - **Create** new menu items.
 - **Read** menu items (single or all).
 - **Update** existing menu items.
 - **Delete** menu items.
-
-
-- **Dependency Injection**: Facilitates service lifetime management and improves testability with DI.
-- **Entity Framework Core**: Handles database operations, migrations, and queries with EF Core.
-- **MVC Architecture**:  Clean separation of responsibilities between models, API endpoints (views), and controllers.
-- **Swagger/OpenAPI**: Built-in Swagger UI for easy API testing and comprehensive documentation.
-- **SOLID Principles**: Follows SOLID principles to promote clean, maintainable, and scalable code.
 
 ## Getting Started
 
@@ -93,3 +93,8 @@ POST /api/menuitems
     "category": 1
 }
 ```
+
+## Tests:
+- Project has some basic tests, to run them:
+  ```bash
+  dotnet test
