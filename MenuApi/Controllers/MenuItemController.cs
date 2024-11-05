@@ -1,4 +1,3 @@
-using System.Diagnostics.Eventing.Reader;
 using MenuApi.Models;
 using MenuApi.Models.Requests;
 using MenuApi.Services.Interfaces;
@@ -15,6 +14,42 @@ public class MenuItemController : ControllerBase
     public MenuItemController(IMenuItemService menuItemService)
     {
         _menuItemService = menuItemService;
+    }
+    
+    /// <summary>
+    /// Creates a new menu item
+    /// </summary>
+    /// <param name="request">Object containing details for the menu item</param>
+    /// <returns>
+    /// A status code that indicates the result of the operation.
+    /// </returns>
+    /// <response code="200">A menu item was created successfully</response>
+    /// <response code="400">A bad request was provided</response>
+    [HttpPost]
+    public ActionResult<MenuItem> CreateMenuItem([FromBody] MenuItemRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var menuItem = new MenuItem()
+        {
+            Name = request.Name,
+            Description = request.Description,
+            Price = request.Price ?? 5, //Should really be getting a default price from some kind of config
+            Category = request.Category ?? Category.Unknown,
+            LastUpdated = DateTime.Now
+        };
+
+        try
+        {
+            return Ok(_menuItemService.AddMenuItem(menuItem));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     /// <summary>
@@ -51,42 +86,6 @@ public class MenuItemController : ControllerBase
         }
 
         return Ok(menuItem);
-    }
-
-    /// <summary>
-    /// Creates a new menu item
-    /// </summary>
-    /// <param name="request">Object containing details for the menu item</param>
-    /// <returns>
-    /// A status code that indicates the result of the operation.
-    /// </returns>
-    /// <response code="200">A menu item was created successfully</response>
-    /// <response code="400">A bad request was provided</response>
-    [HttpPost]
-    public ActionResult<MenuItem> CreateMenuItem([FromBody] MenuItemRequest request)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        var menuItem = new MenuItem()
-        {
-            Name = request.Name,
-            Description = request.Description,
-            Price = request.Price ?? 5, //Should really be getting a default price from some kind of config
-            Category = request.Category ?? Category.Unknown,
-            LastUpdated = DateTime.Now
-        };
-
-        try
-        {
-            return Ok(_menuItemService.AddMenuItem(menuItem));
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
     }
     
     /// <summary>

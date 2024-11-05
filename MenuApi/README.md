@@ -8,6 +8,7 @@ This API provides full CRUD (Create, Read, Update, Delete) functionality for man
 - [Getting Started](#getting-started)
 - [API Endpoints](#api-endpoints)
 - [Example Request](#example-request)
+- [Testing](#tests)
 
 ---
 

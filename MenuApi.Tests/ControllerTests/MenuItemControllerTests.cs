@@ -24,7 +24,7 @@ public class MenuItemControllerTests
     public void GetMenuItem_ShouldReturnOk_WhenMenuItemExists()
     {
         var itemId = Guid.NewGuid();
-        var item = new MenuItem { Id = itemId, Name = "Test" };
+        var item = new MenuItem { Id = itemId };
         _menuItemServiceMock.Setup(service => service.GetMenuItem(itemId)).Returns(item);
 
         var result = _controller.GetMenuItem(itemId);
@@ -55,7 +55,7 @@ public class MenuItemControllerTests
     {
         var itemId = Guid.NewGuid();
         var itemRequest = new MenuItemRequest() { Name = "Test", Description = "Test"};
-        var item = new MenuItem { Id = itemId, Name = "Test" };
+        var item = new MenuItem { Id = itemId, Name = "Test", Description = "Test" };
 
         _menuItemServiceMock.Setup(service => service.GetMenuItem(itemId)).Returns(item);
         _menuItemServiceMock.Setup(service => service.UpdateMenuItem(It.IsAny<MenuItem>())).Returns(item);
@@ -77,7 +77,6 @@ public class MenuItemControllerTests
     {
         var itemId = Guid.NewGuid();
         var itemRequest = new MenuItemRequest() { Name = "Test", Description = "Test"};
-        var item = new MenuItem { Id = itemId, Name = "Test" };
 
         _menuItemServiceMock.Setup(service => service.GetMenuItem(itemId)).Returns((MenuItem)null!);
 

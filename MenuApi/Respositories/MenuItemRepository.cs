@@ -13,7 +13,14 @@ public class MenuItemRepository: IMenuItemRepository
     {
         _dbContext = dbContext;
     }
-
+    
+    public MenuItem CreateMenuItem(MenuItem menuItem)
+    {
+        var newItem = _dbContext.MenuItems.Add(menuItem);
+        _dbContext.SaveChanges();
+        return newItem.Entity;
+    }
+    
     public IEnumerable<MenuItem> GetAllMenuItems()
     {
         return _dbContext.MenuItems.ToList();
@@ -27,13 +34,6 @@ public class MenuItemRepository: IMenuItemRepository
     public MenuItem? GetMenuItemById(Guid id)
     {
         return _dbContext.MenuItems.FirstOrDefault(item => item.Id == id);
-    }
-
-    public MenuItem CreateMenuItem(MenuItem menuItem)
-    {
-        var newItem = _dbContext.MenuItems.Add(menuItem);
-        _dbContext.SaveChanges();
-        return newItem.Entity;
     }
 
     public MenuItem UpdateMenuItem(MenuItem menuItem)

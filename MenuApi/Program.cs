@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Add database
+//Test db connection
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<IMenuContext>();

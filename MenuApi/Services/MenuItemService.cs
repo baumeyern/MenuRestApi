@@ -15,24 +15,6 @@ public class MenuItemService: IMenuItemService
         _logger = logger;
     }
     
-    public IEnumerable<MenuItem> GetMenuItems()
-    {
-        return _menuItemRepository.GetAllMenuItems();
-    }
-
-    public MenuItem? GetMenuItem(Guid id)
-    {
-        try
-        {
-            return _menuItemRepository.GetMenuItemById(id);
-        }
-        catch(Exception ex)
-        {
-            _logger.LogError(ex, "Failed to get menu item by Id");
-            return null;
-        }
-    }
-
     public MenuItem AddMenuItem(MenuItem menuItem)
     {
         menuItem.Name = menuItem.Name.Trim();
@@ -51,6 +33,24 @@ public class MenuItemService: IMenuItemService
 
         return _menuItemRepository.CreateMenuItem(menuItem);
     }
+    
+    public IEnumerable<MenuItem> GetMenuItems()
+    {
+        return _menuItemRepository.GetAllMenuItems();
+    }
+
+    public MenuItem? GetMenuItem(Guid id)
+    {
+        try
+        {
+            return _menuItemRepository.GetMenuItemById(id);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get menu item by Id");
+            return null;
+        }
+    }
 
     public MenuItem UpdateMenuItem(MenuItem menuItem)
     {
@@ -61,6 +61,11 @@ public class MenuItemService: IMenuItemService
             _logger.LogError("Cannot update menu item with empty name");
             throw new InvalidOperationException("Cannot update menu item with empty name");
         }
+
+        if (_menuItemRepository.GetMenuItemById(menuItem.Id) == null)
+        {
+            throw new KeyNotFoundException("Menu item with this id does not exist");
+        }
         
         var existingMenuItem = _menuItemRepository.GetMenuItemById(menuItem.Id);
         if (existingMenuItem != null && existingMenuItem.Id != menuItem.Id)
@@ -68,10 +73,7 @@ public class MenuItemService: IMenuItemService
             _logger.LogError("Menu item with this name already exists");
             throw new InvalidOperationException("Menu item with this name already exists");
         }
-
-        if(_menuItemRepository.GetMenuItemById(menuItem.Id) == null)
-            throw new KeyNotFoundException("Menu item with this id does not exist");
-
+        
         return _menuItemRepository.UpdateMenuItem(menuItem);
     }
 

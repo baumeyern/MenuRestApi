@@ -24,6 +24,7 @@ public class MenuItemRepositoryTests
         _menuItemRepository = new MenuItemRepository(context);
     }
 
+    //For repositories, just need to test writing to db
     [TestMethod]
     public void CreateMenuItem_ShouldAddItemToDb()
     {
