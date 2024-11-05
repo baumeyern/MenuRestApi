@@ -32,7 +32,7 @@ To set up and run the project locally:
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/baumeyern/MenuAPI.git
+    git clone https://github.com/baumeyern/MenuRestApi.git
     ```
 
 2. **Install Dependencies** (if using .NET Core):
